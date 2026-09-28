@@ -1,30 +1,41 @@
+# Workflow name shown in the GitHub Actions tab
 name: Python lint
 
+# Trigger the workflow whenever code is pushed to the main branch
 on:
   push:
     branches: [main]
 
 jobs:
+  # Validate the Python application
   validate:
+    # GitHub-hosted Ubuntu runner
     runs-on: ubuntu-latest
-    
+
+    # Run the same validation against multiple Python versions
     strategy:
+      # Continue other matrix jobs even if one Python version fails
       fail-fast: false
-      
+
+      # Create a separate job for each Python version
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
+      # Download the repository code to the GitHub Actions runner
       - name: Checkout Code
         uses: actions/checkout@v5
 
-      - name: Setup Python ${{ matrix.python-version }}
+      # Install the Python version from the matrix
+      - name: Setup Python ${{matrix.python-version}}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-      
+          python-version: ${{matrix.python-version}}
+
+      # Install Python packages listed in requirements.txt
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # Run Flake8 to check Python code for style and common errors
       - name: Run Linter
         run: flake8 app.py
