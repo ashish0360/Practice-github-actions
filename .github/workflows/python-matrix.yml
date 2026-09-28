@@ -18,7 +18,7 @@ jobs:
           python-version: "3.13"
       
       - name: Install dependencies
-        run: pip install -r requirenment.trivy-report.txt
+        run: pip install -r requirenment.txt
 
       - name: Run Linter
         run: flake8 app.py
