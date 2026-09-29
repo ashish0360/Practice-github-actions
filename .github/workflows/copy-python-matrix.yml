@@ -26,8 +26,9 @@ jobs:
 
       - name: Start Application
         run: |
-          python app.py &
-          sleep 20
+          python app.py > app.log 2>&1 &
+          sleep 30
+          cat app.log
 
       - name: Test application
         run: curl http://localhost:5000
