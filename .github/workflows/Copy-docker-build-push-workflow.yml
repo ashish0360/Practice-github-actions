@@ -24,6 +24,6 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{DOCKERHUB_USER}}/python-linting-app:latest
-            ${{DOCKERHUB_USER}}/python-linting-app:${{github.sha}}
-            ${{DOCKERHUB_USER}}/python-linting-app:${{github.ref_name}}
+            ${{vars.DOCKERHUB_USER}}/python-linting-app:latest
+            ${{vars.DOCKERHUB_USER}}/python-linting-app:${{github.sha}}
+            ${{vars.DOCKERHUB_USER}}/python-linting-app:${{github.ref_name}}
