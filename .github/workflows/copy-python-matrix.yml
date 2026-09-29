@@ -9,14 +9,19 @@ jobs:
   validate:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.13","3.14","3.15"]
+
     steps:
       - name: Copy Code
         uses: actions/checkout@v5
 
-      - name: python setup
+      - name: python setup ${{matrix.python-version}}
         uses: actions/setup-python@v7
         with:
-          python-version: 3.13
+          python-version: ${{matrix.python-version}}
       
       - name: Installing dependencies
         run: pip install -r requirements.txt
