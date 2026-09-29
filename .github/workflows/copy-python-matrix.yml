@@ -1,0 +1,33 @@
+name: practice python linting app
+
+on:
+  push:
+    branches: [main]
+
+jobs: 
+
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Copy Code
+        uses: checkout/actions@v5
+
+      - name: python setup
+        uses: actions/setup-python@v7
+        with:
+          python-version: 3.13
+      
+      - name: Installing dependencies
+        run: pip install -r requirements.txt
+
+      - name: Linting code
+        run: flake8 app.py
+
+      - name: Start Application
+        run: |
+          python app.py &
+          sleep 20
+
+      - name: Test application
+        run: curl http://localhost:5000
