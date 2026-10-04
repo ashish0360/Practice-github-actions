@@ -12,6 +12,6 @@ jobs:
         steps:
             - name: checkout code
               uses: actions/checkout@v5
-
+                
             - name: deploying with docker compose
               run: docker compose up -d --build

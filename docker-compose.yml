@@ -1,6 +1,6 @@
 services:
   web:
-    image: ${DOCKERHUB_USER}/github-actions-python-app
+    image: ${DOCKERHUB_USER}/github-actions-python-app:latest
     container_name: python-app
     ports:
       - "80:80"
