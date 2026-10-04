@@ -12,7 +12,7 @@ jobs:
     deploying:
         env:
             DOCKER_USER: ${{vars.DOCKERHUB_USER}}
-            DOCER_TAG: ${{github.sha}}
+            DOCKER_TAG: ${{github.sha}}
 
         runs-on: self-hosted
 
