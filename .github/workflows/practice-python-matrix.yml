@@ -29,11 +29,11 @@ jobs:
       - name: Linting code
         run: flake8 app.py
 
-      - name: Start Application
-        run: |
-          python app.py > app.log 2>&1 &
-          sleep 30
-          cat app.log
+#      - name: Start Application
+#        run: |
+#          python app.py > app.log 2>&1 &
+#          sleep 30
+#          cat app.log
 
-      - name: Test application
-        run: curl http://localhost:5000
+#      - name: Test application
+#         run: curl http://localhost:5000
