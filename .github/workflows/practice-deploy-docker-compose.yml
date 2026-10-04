@@ -2,7 +2,7 @@ name: Deployment of Flask App
 
 on:
     workflow_run:
-        workflows: ["Docker Build and Push"] # Must exactly match the name of the first workflow
+        workflows: ["Practice Build Push to Dockerhub"] # Must exactly match the name of the first workflow
         types:
             - completed
         branches:
