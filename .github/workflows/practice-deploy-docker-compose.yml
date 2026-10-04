@@ -1,0 +1,24 @@
+name: Deployment of Flask App
+
+on:
+    workflow_run:
+        workflows: ["Build Push to Dockerhub"] # Must exactly match the name of the first workflow
+        types:
+            - completed
+        branches:
+            - main
+
+jobs:
+    deploying:
+        env:
+            DOCKER_USER: ${{vars.DOCKERHUB_USER}}
+            DOCER_TAG: ${{github.sha}}
+
+        runs-on: self-hosted
+
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v5
+            
+            - name: deploying app via docker compose
+              run: docker compose down && docker compose up -d --build --force-recreate
