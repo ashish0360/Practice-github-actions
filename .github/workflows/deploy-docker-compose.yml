@@ -1,18 +1,25 @@
-name: Deploy Falsk App
+name: Deploy Flask App
 
+# Allows the deployment workflow to be started manually
 on:
     workflow_dispatch:
 
 jobs:
     deploy:
+        # Docker Hub user and unique image tag for this deployment
         env:
-            DOCKERHUB_USER: ${{vars.DOCKERHUB_USER}}
-            DOCKER_TAG: ${{github.sha}}
+            DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
+            DOCKER_TAG: ${{ github.sha }}
+
+        # Run deployment on our EC2 self-hosted runner
         runs-on: self-hosted
 
         steps:
-            - name: checkout code
+
+            # Download the latest repository code
+            - name: Checkout code
               uses: actions/checkout@v5
-                
-            - name: deploying with docker compose
+
+            # Stop the old container and recreate it with the latest image
+            - name: Deploy with Docker Compose
               run: docker compose down && docker compose up -d --build --force-recreate

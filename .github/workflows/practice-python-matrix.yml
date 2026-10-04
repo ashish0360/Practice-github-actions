@@ -1,39 +1,49 @@
-name: practice python linting app
+name: Practice Python Linting App
 
+# Run the workflow when code is pushed to main
 on:
   push:
     branches: [main]
 
-jobs: 
+jobs:
 
   validate:
+    # Use GitHub-hosted Ubuntu runner
     runs-on: ubuntu-latest
 
+    # Test the application across multiple Python versions
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11","3.12","3.13"]
+        python-version: ["3.11", "3.12", "3.13"]
 
     steps:
-      - name: Copy Code
+
+      # Download the repository code
+      - name: Checkout Code
         uses: actions/checkout@v5
 
-      - name: python setup ${{matrix.python-version}}
+      # Install the selected Python version
+      - name: Python Setup ${{ matrix.python-version }}
         uses: actions/setup-python@v7
         with:
-          python-version: ${{matrix.python-version}}
-      
-      - name: Installing dependencies
+          python-version: ${{ matrix.python-version }}
+
+      # Install project dependencies
+      - name: Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: Linting code
+      # Check Python code quality using Flake8
+      - name: Lint Code
         run: flake8 app.py
 
-#      - name: Start Application
-#        run: |
-#          python app.py > app.log 2>&1 &
-#          sleep 30
-#          cat app.log
+      # Start the Flask application in the background
+      # - name: Start Application
+      #   run: |
+      #     python app.py > app.log 2>&1 &
+      #     sleep 30
+      #     cat app.log
 
-#      - name: Test application
-#         run: curl http://localhost:5000
+      # Test the application endpoint
+      # - name: Test Application
+      #   run: curl http://localhost:5000

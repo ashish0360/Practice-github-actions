@@ -1,6 +1,12 @@
 services:
+
   web:
+    # Pull the Docker image using the configured user and commit SHA
     image: ${DOCKERHUB_USER}/github-actions-python-app:${DOCKER_TAG}
+
+    # Name the running container
     container_name: python-app
+
+    # Map EC2 port 80 to the container's port 80
     ports:
       - "80:80"
