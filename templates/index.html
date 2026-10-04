@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps Zero To Hero</title>
+
+    <title>DevOps Engineering Lab</title>
 
     <style>
         * {
@@ -17,72 +18,130 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: #0b1120;
             font-family: Arial, sans-serif;
-            color: white;
+            color: #e5e7eb;
         }
 
         .container {
+            width: 90%;
+            max-width: 760px;
             text-align: center;
-            max-width: 650px;
-            padding: 30px;
+            padding: 40px 20px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 14px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            background: #12352d;
+            color: #4ade80;
+            font-size: 12px;
+            border: 1px solid #1f6b55;
         }
 
         h1 {
-            font-size: 2.6rem;
-            margin-bottom: 8px;
-            color: #00d2ff;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #f8fafc;
+        }
+
+        h1 span {
+            color: #38bdf8;
         }
 
         .subtitle {
-            color: #bbb;
-            margin-bottom: 20px;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            font-size: 15px;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 7px 18px;
-            border: 1px solid #7b2ff7;
-            border-radius: 20px;
-            color: #c4b5fd;
-            margin-bottom: 25px;
-        }
-
-        .section-title {
-            margin-bottom: 15px;
-            color: #7dd3fc;
-        }
-
-        .cards {
+        .pipeline {
             display: flex;
-            gap: 12px;
+            align-items: center;
             justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
         }
 
+        .stage {
+            padding: 10px 15px;
+            background: #111827;
+            border: 1px solid #263244;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .arrow {
+            color: #38bdf8;
+        }
+
+        .section {
+            margin-top: 25px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
         .card {
-            padding: 18px;
-            min-width: 170px;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 12px;
+            padding: 18px 10px;
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            border-color: #38bdf8;
+            transform: translateY(-3px);
+        }
+
+        .icon {
+            font-size: 22px;
+            margin-bottom: 8px;
         }
 
         .card span {
             display: block;
-            color: #999;
-            font-size: 12px;
-            margin-bottom: 6px;
+            color: #64748b;
+            font-size: 11px;
+            margin-bottom: 5px;
         }
 
         .card strong {
-            font-size: 18px;
+            font-size: 14px;
+            color: #f1f5f9;
         }
 
         .footer {
-            margin-top: 25px;
-            color: #888;
-            font-size: 13px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #1f2937;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -91,43 +150,62 @@
 
     <div class="container">
 
-        <h1>🚀 DevOps Zero To Hero</h1>
+        <div class="status">● SYSTEM ONLINE</div>
+
+        <h1>DevOps <span>Engineering Lab</span></h1>
 
         <p class="subtitle">
-            Learn • Build • Automate • Deploy
+            Building, automating and deploying modern applications.
         </p>
 
-        <div class="badge">Josh Batch 10</div>
+        <!-- CI/CD Pipeline -->
+        <div class="pipeline">
+            <div class="stage">Git</div>
+            <div class="arrow">→</div>
+            <div class="stage">GitHub Actions</div>
+            <div class="arrow">→</div>
+            <div class="stage">Docker</div>
+            <div class="arrow">→</div>
+            <div class="stage">AWS EC2</div>
+        </div>
 
-        <h3 class="section-title">⚙️ CI/CD Pipeline</h3>
+        <div class="section">
 
-        <div class="cards">
+            <div class="section-title">Technology Stack</div>
 
-            <div class="card">
-                <span>Application</span>
-                <strong>Flask 🐍</strong>
-            </div>
+            <div class="cards">
 
-            <div class="card">
-                <span>Runtime</span>
-                <strong>Python 3.14</strong>
-            </div>
+                <div class="card">
+                    <div class="icon">🐍</div>
+                    <span>APPLICATION</span>
+                    <strong>Flask</strong>
+                </div>
 
-            <div class="card">
-                <span>Container</span>
-                <strong>Docker 🐳</strong>
-            </div>
+                <div class="card">
+                    <div class="icon">⚙️</div>
+                    <span>RUNTIME</span>
+                    <strong>Python 3.14</strong>
+                </div>
 
-            <div class="card">
-                <span>Deployment</span>
-                <strong>AWS EC2 ☁️</strong>
+                <div class="card">
+                    <div class="icon">🐳</div>
+                    <span>CONTAINER</span>
+                    <strong>Docker</strong>
+                </div>
+
+                <div class="card">
+                    <div class="icon">☁️</div>
+                    <span>CLOUD</span>
+                    <strong>AWS EC2</strong>
+                </div>
+
             </div>
 
         </div>
 
-        <p class="footer">
-            Built with Flask • Docker • GitHub Actions • AWS
-        </p>
+        <div class="footer">
+            Automated delivery • Containerized application • Cloud deployment
+        </div>
 
     </div>
 
