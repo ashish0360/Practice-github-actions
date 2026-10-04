@@ -2,7 +2,12 @@ name: Deploy Flask App
 
 # Allows the deployment workflow to be started manually
 on:
-    workflow_dispatch:
+    workflow_run:
+        workflows: ["Docker Build and Push"] # Must match the exact name of the first workflow
+        types:
+            - completed
+        branches:
+            - main
 
 jobs:
     deploy:
