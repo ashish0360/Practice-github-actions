@@ -1,3 +1,4 @@
 #libraries
 flake8 #syntax checking
-flask
+flask==3.1.0
+bandit #SAST
