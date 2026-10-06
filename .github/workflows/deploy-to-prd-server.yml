@@ -18,4 +18,4 @@ jobs:
                     echo "server update"
                     sudo apt-get update
                     echo "starting deployment..."
-                    mkdir -f docker
+                    mkdir -p docker
