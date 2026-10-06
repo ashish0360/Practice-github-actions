@@ -35,3 +35,4 @@ jobs:
     deploy:
         needs: [trivy]
         uses: ./.github/workflows/deploy-to-prd-server.yml
+        secrets: inherit
