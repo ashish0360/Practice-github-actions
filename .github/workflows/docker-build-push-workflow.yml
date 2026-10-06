@@ -3,8 +3,7 @@ name: Docker Build and Push
 
 # Trigger workflow whenever code is pushed to the main branch
 on:
-  push:
-    branches: [main]
+  workflow_call:
 
 jobs:
   # Build the Docker image and push it to Docker Hub

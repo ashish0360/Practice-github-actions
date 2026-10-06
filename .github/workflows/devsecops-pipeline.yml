@@ -5,6 +5,7 @@ on:
         branches: [main]
 
 jobs:
+#====================CI Part====================
     code-quality:
         uses: ./.github/workflows/code-quality.yml
     
@@ -18,5 +19,8 @@ jobs:
     docker-scan:
         uses: ./.github/workflows/docker-lint.yml
 
-
-    
+#====================CD Part====================
+    build:
+        needs: [code-quality, secret-scan, dependency-scan, docker-scan]
+        uses: ./.github/workflows/docker-build-push-workflow.yml
+        secrets: inherit
