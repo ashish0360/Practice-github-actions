@@ -8,7 +8,11 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: SSH to production server
+
+            - name: Checkout code
+              uses: actions/checkout@v5
+
+            - name: SSH to production server and create docker folder
               uses: appleboy/ssh-action@v1.0.3
               with:
                 host: ${{ secrets.EC2_SSH_HOST }}
@@ -17,5 +21,29 @@ jobs:
                 script: |
                     echo "server update"
                     sudo apt-get update
+                    sudo apt-get install docker.io docker-compose-v2 -y
+                    sudo usermod -aG docker $USER && newgrp docker 
                     echo "starting deployment..."
                     mkdir -p docker
+
+            - name: Copy files via SSH to prd server
+              uses: appleboy/scp-action@v1
+              with:
+                host: ${{ secrets.EC2_SSH_HOST }}
+                username: ${{ secrets.EC2_SSH_USER }}
+                key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+                source: docker-compose.yml        # Comma-separated list of files/folders to copy
+                target: ~/docker
+
+            - name: SSH to production server and run app
+              uses: appleboy/ssh-action@v1.0.3
+              with:
+                host: ${{ secrets.EC2_SSH_HOST }}
+                username: ${{ secrets.EC2_SSH_USER }}
+                key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+                script: |
+                    echo "runnning application"
+                    export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
+                    export DOCKER_TAG=${{ github.sha }}
+                    echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ vars.DOCKERHUB_USER }} --password-stdin
+                    cd ~/docker && docker compose down && docker compose up -d --build --force-recreate 
