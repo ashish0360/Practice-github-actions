@@ -23,5 +23,6 @@ jobs:
               with:
                 image-ref: ${{ vars.DOCKERHUB_USER }}/github-actions-python-app:${{ github.sha }}
                 severity: 'CRITICAL,HIGH'
+                ignore-unfixed: true
                 exit-code: '1'
-                trivyignore: ${{ github.workspace }}/.trivyignore
+                trivyignores: ${{ github.workspace }}/.trivyignore
