@@ -20,8 +20,7 @@ jobs:
                 key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
                 script: |
                     echo "server update"
-                    sudo apt-get update
-                    sudo apt-get install docker.io docker-compose-v2 -y
+                    sudo apt-get update && sudo apt-get install docker.io docker-compose-v2 -y
                     sudo usermod -aG docker $USER && newgrp docker 
                     echo "starting deployment..."
                     mkdir -p docker
