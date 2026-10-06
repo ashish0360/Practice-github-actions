@@ -29,3 +29,9 @@ jobs:
         needs: [build]
         uses: ./.github/workflows/image-scan.yml
         secrets: inherit
+
+#====================Deploy to Production====================
+
+    deploy:
+        needs: [trivy]
+        uses: ./.github/workflows/deploy-to-prd-server.yml
