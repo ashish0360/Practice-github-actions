@@ -17,4 +17,4 @@ jobs:
                 script: |
                     sudo apt-get update
                     echo "starting deployment..."
-                    mkdir -f devops
+                    mkdir -f docker
