@@ -13,7 +13,7 @@ jobs:
     steps:
       # Download repository code to the GitHub Actions runner
       - name: Checkout Code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       # Authenticate the runner with Docker Hub
       # Username is stored as a GitHub Repository Variable
