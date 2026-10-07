@@ -27,6 +27,9 @@ jobs:
 
             - name: Upload static files
               uses: actions/upload-pages-artifact@v3
+              with:
+                name: index.html        # Name of the downloadable ZIP archive
+                path: ./index.html 
 
             - name: Deploy pages
               uses: actions/deploy-pages@v4
