@@ -1,43 +1,71 @@
-▼
+# 🚀 Complete DevSecOps CI/CD Pipeline
+
+A practical **DevSecOps CI/CD pipeline** built with GitHub Actions, Docker, security scanning tools, and AWS EC2.
+
+> **Pipeline:** Code → Scan → Build → Image Scan → Deploy
+
+---
+
+## 🔄 Pipeline Overview
+
+```text
+Developer
+    │
+    ▼
+Git Push → main
+    │
+    ▼
+GitHub Actions
+    │
+    ├── Code Quality
+    │   ├── Flake8
+    │   └── Bandit (SAST)
+    │
+    ├── Security Scans
+    │   ├── Gitleaks
+    │   └── pip-audit
+    │
+    ├── Dockerfile Scan
+    │   └── Hadolint
+    │
+    ▼
 Docker Build & Push
-   │
-   ├── Docker Buildx
-   └── Docker Hub
-   │
-   ▼
+    ├── Docker Buildx
+    └── Docker Hub
+    │
+    ▼
 Trivy Image Scan
-   │
-   ▼
+    │
+    ▼
 Production Deployment
-   │
-   ├── SSH
-   ├── SCP
-   └── Docker Compose
-   │
-   ▼
+    ├── SSH
+    ├── SCP
+    └── Docker Compose
+    │
+    ▼
 AWS EC2
-   │
-   ▼
+    │
+    ▼
 Flask + Gunicorn
 
 🛠️ Tech Stack
 Technology	Purpose
 GitHub Actions	CI/CD automation
-Python	Application
+Python	Application development
 Flask	Web framework
 Gunicorn	Production WSGI server
-Docker	Containerization
-Docker Compose	Deployment
-Docker Buildx	Image building
-Docker Hub	Image registry
-Flake8	Code linting
-Bandit	SAST
+Docker	Application containerization
+Docker Compose	Container deployment
+Docker Buildx	Docker image building
+Docker Hub	Container image registry
+Flake8	Code quality and linting
+Bandit	Static Application Security Testing (SAST)
 Gitleaks	Secret scanning
-pip-audit	Dependency scanning
+pip-audit	Python dependency vulnerability scanning
 Hadolint	Dockerfile linting
-Trivy	Container vulnerability scanning
+Trivy	Container image vulnerability scanning
 AWS EC2	Production server
-SSH/SCP	Remote deployment
+SSH / SCP	Remote deployment
 
 
 📁 Project Structure
@@ -63,6 +91,7 @@ requirements.txt
 README.md
 
 🔐 Security Pipeline
+Security checks are performed at different stages of the development lifecycle.
 Stage	Tool	Purpose
 Code	Flake8	Code quality
 Code	Bandit	SAST
@@ -74,50 +103,54 @@ Image	Trivy	Container vulnerabilities
 
 🔗 Reusable Workflows
 The pipeline uses GitHub Actions workflow_call to create reusable workflows.
-Complete Pipeline
-       │
-       ├── Code Quality
-       ├── Secret Scan
-       ├── Dependency Scan
-       ├── Docker Lint
-       │
-       ▼
-     Build
-       │
-       ▼
-   Trivy Scan
-       │
-       ▼
-    Deploy
+Complete DevSecOps Pipeline
+            │
+            ├── Code Quality
+            ├── Secret Scan
+            ├── Dependency Scan
+            ├── Docker Lint
+            │
+            ▼
+          Build
+            │
+            ▼
+       Trivy Scan
+            │
+            ▼
+          Deploy
 
-Jobs use needs to control the execution order and ensure deployment happens only after the required checks pass.
+GitHub Actions needs is used to control job dependencies and ensure that deployment only happens after the required checks pass.
 🐳 Docker
-The application is built as a Docker image and pushed to Docker Hub with:
+The application is packaged as a Docker image and pushed to Docker Hub.
+The image uses multiple tags:
 latest
 main
 <commit-sha>
 
-The commit SHA provides a unique image version for deployment and traceability.
+The commit SHA provides a unique image version, making deployments traceable to a specific source-code commit.
 🚀 Production Deployment
 The application is deployed to an AWS EC2 server.
+Deployment Flow
 Docker Hub
-    ↓
+    │
+    ▼
 SSH to EC2
-    ↓
+    │
+    ▼
 Docker Login
-    ↓
-Pull Image
-    ↓
+    │
+    ▼
+Pull Docker Image
+    │
+    ▼
 Docker Compose
-    ↓
+    │
+    ▼
 Flask + Gunicorn
 
-Application port:
-80
-
-Health endpoint:
-/health
-
+Application
+Port: 80
+Health Endpoint: /health
 🔑 GitHub Secrets & Variables
 Secrets
 DOCKERHUB_TOKEN
@@ -128,24 +161,35 @@ EC2_SSH_PRIVATE_KEY
 Variables
 DOCKERHUB_USER
 
-Sensitive credentials are stored in GitHub Secrets and are not committed to the repository.
-🧠 DevSecOps Approach
-The project follows a Shift-Left Security approach by identifying issues early in the development lifecycle.
+Sensitive credentials are stored securely in GitHub Secrets and are not committed to the repository.
+🛡️ DevSecOps / Shift-Left Approach
+Security is integrated early into the development lifecycle instead of waiting until production.
 Code
- ↓
+  │
+  ▼
 Lint + SAST + Secret Scan
- ↓
+  │
+  ▼
 Dependency Scan
- ↓
+  │
+  ▼
 Dockerfile Scan
- ↓
+  │
+  ▼
 Docker Build
- ↓
+  │
+  ▼
 Trivy Image Scan
- ↓
+  │
+  ▼
 Production Deployment
 
-📌 Key Learning
+🧠 Key Learning
 Check → Scan → Build → Scan Image → Deploy
 
-This project demonstrates a practical approach to learning DevOps and DevSecOps through real-world CI/CD automation, containerization, security scanning, and AWS deployment.
+This project demonstrates practical DevOps and DevSecOps concepts through CI/CD automation, security scanning, Docker containerization, reusable GitHub Actions workflows, and AWS EC2 deployment.
+📌 Project Status
+Status: 🟢 Actively Learning & Building
+Focus: DevOps • DevSecOps • CI/CD • Docker • GitHub Actions • AWS
+
+This version should render much more professionally on GitHub because the **tables are actual Markdown tables** and all architecture diagrams are inside fenced code blocks, so GitHub won't try to interpret the `│`, `▼`, and `├──` characters as ordinary page content.
