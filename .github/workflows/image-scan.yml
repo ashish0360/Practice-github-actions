@@ -1,28 +1,44 @@
-#Trivy Scanner for CVEs
+# Container Image Vulnerability Scanning
+# Trivy → Scans Docker images for known CVEs
 name: Image Scanner
 
+# Allow this workflow to be called by the main CI/CD pipeline
 on:
     workflow_call:
 
 jobs:
+    # Scan the Docker image for security vulnerabilities
     image-scanner:
+        # Run the scan on the self-hosted runner
         runs-on: self-hosted
 
         steps:
+            # Download the repository code
             - name: Checkout Code
               uses: actions/checkout@v6
 
+            # Authenticate the runner with Docker Hub
             - name: Login to Docker Hub
               uses: docker/login-action@v3
               with:
                 username: ${{ vars.DOCKERHUB_USER }}
                 password: ${{ secrets.DOCKERHUB_TOKEN }}
             
+            # Scan the Docker image for Critical and High vulnerabilities
             - name: Trivy Scanner
               uses: aquasecurity/trivy-action@v0.36.0
               with:
+                # Scan the image built from the current commit
                 image-ref: ${{ vars.DOCKERHUB_USER }}/github-actions-python-app:${{ github.sha }}
+
+                # Fail the workflow when Critical or High vulnerabilities are found
                 severity: 'CRITICAL,HIGH'
+
+                # Ignore vulnerabilities that do not have a fix available
                 ignore-unfixed: true
+
+                # Return exit code 1 when vulnerabilities matching the policy are found
                 exit-code: '1'
+
+                # Use the repository's Trivy ignore file for approved exceptions
                 trivyignores: ${{ github.workspace }}/.trivyignore

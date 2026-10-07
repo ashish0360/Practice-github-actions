@@ -1,3 +1,5 @@
+# Production Deployment Workflow
+# SSH → Prepare Server → SCP → Docker Login → Deploy
 name: Deploy to production server
 
 on:
@@ -5,13 +7,16 @@ on:
 
 jobs:
     deploy:
+        # Run deployment from the self-hosted EC2 runner
         runs-on: self-hosted
 
         steps:
 
+            # Download the repository code
             - name: Checkout code
               uses: actions/checkout@v6
 
+            # Prepare the production server with Docker and deployment directory
             - name: SSH to production server and create docker folder
               uses: appleboy/ssh-action@v1.0.3
               with:
@@ -20,20 +25,29 @@ jobs:
                 key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
                 script: |
                     echo "server update"
+
+                    # Install Docker Engine and Docker Compose
                     sudo apt-get update && sudo apt-get install docker.io docker-compose-v2 -y
-                    sudo usermod -aG docker $USER && newgrp docker 
+
+                    # Allow the current user to run Docker without sudo
+                    sudo usermod -aG docker $USER && newgrp docker
+
                     echo "starting deployment..."
+
+                    # Create deployment directory if it doesn't exist
                     mkdir -p docker
 
+            # Copy the Docker Compose configuration to the production server
             - name: Copy files via SSH to prd server
               uses: appleboy/scp-action@v1
               with:
                 host: ${{ secrets.EC2_SSH_HOST }}
                 username: ${{ secrets.EC2_SSH_USER }}
                 key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-                source: docker-compose.yml        # Comma-separated list of files/folders to copy
+                source: docker-compose.yml
                 target: ~/docker
 
+            # Authenticate with Docker Hub and deploy the application
             - name: SSH to production server and run app
               uses: appleboy/ssh-action@v1.0.3
               with:
@@ -41,8 +55,14 @@ jobs:
                 username: ${{ secrets.EC2_SSH_USER }}
                 key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
                 script: |
-                    echo "runnning application"
+                    echo "running application"
+
+                    # Set Docker Hub user and commit-based image tag
                     export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
                     export DOCKER_TAG=${{ github.sha }}
+
+                    # Authenticate the production server with Docker Hub
                     echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ vars.DOCKERHUB_USER }} --password-stdin
-                    cd ~/docker && docker compose down && docker compose up -d --build --force-recreate 
+
+                    # Stop the old container and start the new application
+                    cd ~/docker && docker compose down && docker compose up -d --build --force-recreate

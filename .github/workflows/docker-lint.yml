@@ -1,17 +1,22 @@
-#Dockerfile issue and vulnerability
+# Dockerfile quality and security validation
 name: Docker lint
 
+# Allow this workflow to be called by the main CI/CD pipeline
 on:
     workflow_call:
 
 jobs:
+    # Validate the Dockerfile for best practices and common issues
     validate-dockerfile:
+        # Run the scan on the self-hosted runner
         runs-on: self-hosted
 
         steps:
+            # Download the repository code
             - name: Checkout Code
               uses: actions/checkout@v6
 
+            # Check Dockerfile for syntax issues, security risks and best practices
             - name: Validate Dockerfile
               uses: hadolint/hadolint-action@v3.1.0
               with:

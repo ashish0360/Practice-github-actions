@@ -1,37 +1,52 @@
+# Complete CI/CD pipeline:
+# Code Quality → Security Scans → Build → Image Scan → Production Deployment
 name: Complete DevSecOps Pipeline
 
+# Trigger the pipeline whenever code is pushed to the main branch
 on:
     push:
         branches: [main]
 
 jobs:
-#====================CI Part====================
+
+#==================== CI Part ====================
+
+    # Check code quality using linting and SAST
     code-quality:
         uses: ./.github/workflows/code-quality.yml
     
+    # Scan the repository for exposed secrets
     secret-scan:
         uses: ./.github/workflows/secrets-scan.yml
         secrets: inherit
 
+    # Scan Python dependencies for known vulnerabilities
     dependency-scan:
         uses: ./.github/workflows/dependency-scan.yml
 
+    # Scan Docker configuration for common issues
     docker-scan:
         uses: ./.github/workflows/docker-lint.yml
 
-#====================CD Part====================
+
+#==================== CD Part ====================
+
+    # Build and push the Docker image after all CI checks pass
     build:
         needs: [code-quality, secret-scan, dependency-scan, docker-scan]
         uses: ./.github/workflows/docker-build-push-workflow.yml
         secrets: inherit
 
+    # Scan the Docker image for vulnerabilities using Trivy
     trivy:
         needs: [build]
         uses: ./.github/workflows/image-scan.yml
         secrets: inherit
 
-#====================Deploy to Production====================
 
+#==================== Deploy to Production ====================
+
+    # Deploy the scanned Docker image to the production server
     deploy:
         needs: [trivy]
         uses: ./.github/workflows/deploy-to-prd-server.yml

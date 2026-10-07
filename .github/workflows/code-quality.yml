@@ -1,5 +1,5 @@
-#Linting and SAST Scan
-#lint - flake8 and SAST - Bandit
+# Code Quality: Linting and Static Application Security Testing (SAST)
+# Flake8 → Code quality and style | Bandit → Python security vulnerabilities
 name: Code Quality
 
 on:
@@ -8,25 +8,32 @@ on:
 jobs:
     validate:
         runs-on: self-hosted
+
+        # Test the application against multiple Python versions
         strategy:
             fail-fast: false
             matrix:
                 python-version: ["3.12", "3.13"]
 
         steps:
+            # Download the repository code
             - name: Checkout Code
               uses: actions/checkout@v6
 
+            # Install the Python version defined by the matrix
             - name: Setup Python ${{matrix.python-version}}
               uses: actions/setup-python@v5
               with:
                 python-version: ${{matrix.python-version}}
 
+            # Install project dependencies
             - name: Install dependencies
               run: pip install -r requirements.txt
 
+            # Check code quality, formatting and common coding issues
             - name: Run Linter
               run: flake8 app.py
-        
+
+            # Scan Python code for common security vulnerabilities
             - name: Run SAST
               run: bandit -r app.py
