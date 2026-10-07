@@ -188,8 +188,3 @@ Production Deployment
 Check → Scan → Build → Scan Image → Deploy
 
 This project demonstrates practical DevOps and DevSecOps concepts through CI/CD automation, security scanning, Docker containerization, reusable GitHub Actions workflows, and AWS EC2 deployment.
-📌 Project Status
-Status: 🟢 Actively Learning & Building
-Focus: DevOps • DevSecOps • CI/CD • Docker • GitHub Actions • AWS
-
-This version should render much more professionally on GitHub because the **tables are actual Markdown tables** and all architecture diagrams are inside fenced code blocks, so GitHub won't try to interpret the `│`, `▼`, and `├──` characters as ordinary page content.
