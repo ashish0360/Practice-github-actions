@@ -8,7 +8,7 @@ on:
 jobs:
   # Build the Docker image and push it to Docker Hub
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       # Download repository code to the GitHub Actions runner
