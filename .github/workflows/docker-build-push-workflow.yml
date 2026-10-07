@@ -9,7 +9,7 @@ jobs:
   # Build the application image and publish it to Docker Hub
   build-and-push:
     # Run the build on the self-hosted runner
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       # Download the repository code

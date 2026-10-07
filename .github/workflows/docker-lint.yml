@@ -9,7 +9,7 @@ jobs:
     # Validate the Dockerfile for best practices and common issues
     validate-dockerfile:
         # Run the scan on the self-hosted runner
-        runs-on: self-hosted
+        runs-on: ubuntu-latest
 
         steps:
             # Download the repository code

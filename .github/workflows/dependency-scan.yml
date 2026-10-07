@@ -7,7 +7,7 @@ on:
 
 jobs:
     dependency-check:
-        runs-on: self-hosted
+        runs-on: ubuntu-latest
 
         steps:
             # Download the repository code
