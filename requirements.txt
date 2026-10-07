@@ -1,5 +1,6 @@
-#libraries
-flake8 #syntax checking
-flask==3.1.3
-bandit #SAST
-gunicorn
+# Python project dependencies
+
+flake8        # Code quality and syntax/style checking
+flask==3.1.3  # Web application framework
+bandit        # SAST: scans Python code for security vulnerabilities
+gunicorn      # Production WSGI server for running Flask applications
