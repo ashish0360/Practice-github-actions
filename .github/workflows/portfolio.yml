@@ -3,6 +3,7 @@ name: Portfolio Workflow
 on:
     push:
         branches: [main]
+    workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,7 +15,7 @@ jobs:
         runs-on: ubuntu-latest
 
         environment:
-            name: Github Page URL
+            name: github page
             url: ${{ steps.deployment.outputs.page_url }}
 
         steps:
