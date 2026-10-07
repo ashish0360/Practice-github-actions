@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevOps Portfolio | Ashish</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        header {
+            padding: 80px 0 50px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+            border-radius: 20px;
+            color: #38bdf8;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        h1 span {
+            color: #38bdf8;
+        }
+
+        .intro {
+            max-width: 650px;
+            margin: auto;
+            color: #94a3b8;
+            font-size: 18px;
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #f8fafc;
+        }
+
+        .about {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .skill {
+            background: #1e293b;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+        }
+
+        .skill h3 {
+            color: #38bdf8;
+            margin-bottom: 5px;
+        }
+
+        .project {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        .project h3 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        .pipeline {
+            background: #020617;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        .links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #0f172a;
+            background: #38bdf8;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #64748b;
+            border-top: 1px solid #1e293b;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .intro {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+
+            <div class="badge">
+                ● CURRENTLY LEARNING DEVOPS
+            </div>
+
+            <h1>Hi, I'm <span>Ashish</span></h1>
+
+            <p class="intro">
+                I'm learning DevOps by building real projects,
+                automating workflows, containerizing applications,
+                and practicing cloud deployments.
+            </p>
+
+        </div>
+    </header>
+
+
+    <section>
+        <div class="container">
+
+            <h2 class="section-title">About Me</h2>
+
+            <div class="about">
+                <p>
+                    I'm currently developing my skills in DevOps and
+                    cloud technologies through hands-on projects.
+                    My learning journey focuses on automation,
+                    CI/CD, containers, cloud infrastructure,
+                    and DevSecOps practices.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section>
+        <div class="container">
+
+            <h2 class="section-title">What I'm Learning</h2>
+
+            <div class="skills">
+
+                <div class="skill">
+                    <h3>Linux</h3>
+                    <p>Commands, administration and troubleshooting.</p>
+                </div>
+
+                <div class="skill">
+                    <h3>Git & GitHub</h3>
+                    <p>Version control and collaboration.</p>
+                </div>
+
+                <div class="skill">
+                    <h3>Docker</h3>
+                    <p>Containers, images and Docker Compose.</p>
+                </div>
+
+                <div class="skill">
+                    <h3>CI/CD</h3>
+                    <p>GitHub Actions and workflow automation.</p>
+                </div>
+
+                <div class="skill">
+                    <h3>AWS</h3>
+                    <p>EC2 and cloud infrastructure.</p>
+                </div>
+
+                <div class="skill">
+                    <h3>Terraform</h3>
+                    <p>Infrastructure as Code.</p>
+                </div>
+
+                <div class="skill">
+                    <h3>DevSecOps</h3>
+                    <p>Security integrated into CI/CD.</p>
+                </div>
+
+                <div class="skill">
+                    <h3>Kubernetes</h3>
+                    <p>Container orchestration and deployment.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section>
+        <div class="container">
+
+            <h2 class="section-title">Featured Project</h2>
+
+            <div class="project">
+
+                <h3>Complete DevSecOps CI/CD Pipeline</h3>
+
+                <p>
+                    A hands-on CI/CD pipeline that automatically
+                    checks code quality, scans dependencies and
+                    secrets, builds a Docker image, scans the image
+                    for vulnerabilities, and deploys the application
+                    to an AWS EC2 server.
+                </p>
+
+                <div class="pipeline">
+                    Code → Scan → Build → Image Scan → Deploy
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section>
+        <div class="container">
+
+            <h2 class="section-title">Connect With Me</h2>
+
+            <div class="links">
+
+                <a href="https://github.com/ashish0360"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    GitHub
+                </a>
+
+                <a href="https://www.linkedin.com/in/ashish360"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    LinkedIn
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            Learning • Building • Breaking • Fixing • Improving
+        </div>
+    </footer>
+
+</body>
+</html>
